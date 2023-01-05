@@ -1,23 +1,22 @@
 package config
 
 import (
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var (
 	db *gorm.DB
 )
 
-func Connect(){
-	dns := "root:@tcp(127.0.0.1:3306)/bookStore?parseTime=true"
-	d, err := gorm.Open(mysql.Open(dns), &gorm.Config{})
-	if err !=nil{
+func Connect() {
+	d, err := gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/bookStore?parseTime=true")
+	if err != nil {
 		panic(err)
 	}
 	db = d
 }
 
-func GetDB() *gorm.DB{
+func GetDB() *gorm.DB {
 	return db
 }
